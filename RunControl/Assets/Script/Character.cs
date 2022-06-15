@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-
+    public MainControl mainControl;
 
     private void FixedUpdate()
     {
@@ -22,6 +22,14 @@ public class Character : MonoBehaviour
             {
                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name=="2X")
+        {
+            mainControl.NpcCharacterManager(other.name, other.transform);
         }
     }
 }

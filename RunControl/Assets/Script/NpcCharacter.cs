@@ -17,5 +17,12 @@ public class NpcCharacter : MonoBehaviour
         _navMesh.SetDestination(Target.transform.position);
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NeedleBox"))
+        {
+            GameObject.FindWithTag("MainControl").GetComponent<MainControl>().NpcAmount--;
+            gameObject.SetActive(false);
+        }
+    }
 }
