@@ -5,7 +5,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public MainControl mainControl;
-
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * .5f * Time.deltaTime);
@@ -27,9 +26,9 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name=="2X")
+        if (other.CompareTag("Divided")|| other.CompareTag("Multiply")|| other.CompareTag("Minus")|| other.CompareTag("Plus"))
         {
-            mainControl.NpcCharacterManager(other.name, other.transform);
+            mainControl.NpcCharacterManager(other.gameObject.tag, int.Parse(other.name) ,other.transform);
         }
     }
 }

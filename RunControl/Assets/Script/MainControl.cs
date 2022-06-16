@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyLibrary;
 
 
 public class MainControl : MonoBehaviour
@@ -8,43 +9,36 @@ public class MainControl : MonoBehaviour
     public GameObject Target;
     public GameObject Deneme;
     public List<GameObject> NpcPooling;
-    public int NpcAmount;
+    public List<GameObject> DeadEffectPooling;
+    public List<GameObject> CreatEffectPooling;
+    public static int NpcAmount;
     void Start()
     {
         NpcAmount = 1;
     }
-
-    void Update()
-    {
-      
-    }
-
-    public void NpcCharacterManager(string Value, Transform position)
+    public void NpcCharacterManager(string Value,int Number,Transform position)
     {
         switch (Value)
         {
-            case "2X":
-                int Commit=0;
-                foreach (var item in NpcPooling)
-                {             
-                    if (Commit<NpcAmount)
-                    {
-                        if (!item.activeInHierarchy)
-                        {
-                            item.transform.position = position.position;
-                            item.SetActive(true);
-                            Commit++;
-                        }
-                    }
-                    else
-                    {                     
-                        NpcAmount =NpcAmount * 2;
-                        break;
-                    }
-                
-                }
+            case "Multiply":
+                MathOperations.Multiply(Number, NpcPooling, position, CreatEffectPooling);
                 break;
-
+            case "Plus":
+                MathOperations.Plus(Number, NpcPooling, position, CreatEffectPooling);
+                break;
+            case "Minus":
+                MathOperations.Minus(Number, NpcPooling,DeadEffectPooling);
+                break;
+            case "Divided":
+                MathOperations.Divided(Number, NpcPooling,DeadEffectPooling);
+                break;
         }
+    }
+
+   
+    public void DeadEffects(GameObject item)
+    {
+      MathOperations.EffectPoolingManager(DeadEffectPooling,item);
+        NpcAmount--;
     }
 }

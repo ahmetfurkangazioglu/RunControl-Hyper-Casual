@@ -6,6 +6,10 @@ TagManager:
   tags:
   - MainControl
   - NeedleBox
+  - Plus
+  - Minus
+  - Divided
+  - Multiply
   layers:
   - Default
   - TransparentFX
