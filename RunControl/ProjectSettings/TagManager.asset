@@ -10,6 +10,7 @@ TagManager:
   - Minus
   - Divided
   - Multiply
+  - Npc
   layers:
   - Default
   - TransparentFX
