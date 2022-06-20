@@ -21,7 +21,12 @@ public class NpcCharacter : MonoBehaviour
     {
         if (other.CompareTag("NeedleBox"))
         {
-            GameObject.FindWithTag("MainControl").GetComponent<MainControl>().DeadEffects(gameObject);
+            GameObject.FindWithTag("MainControl").GetComponent<MainControl>().DeadEffects(gameObject,false);
+            gameObject.SetActive(false);
+        }
+        if (other.CompareTag("Hamer"))
+        {
+            GameObject.FindWithTag("MainControl").GetComponent<MainControl>().DeadEffects(gameObject,true);
             gameObject.SetActive(false);
         }
     }

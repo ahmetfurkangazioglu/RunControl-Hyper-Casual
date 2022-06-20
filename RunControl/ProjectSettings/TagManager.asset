@@ -11,6 +11,7 @@ TagManager:
   - Divided
   - Multiply
   - Npc
+  - Hamer
   layers:
   - Default
   - TransparentFX

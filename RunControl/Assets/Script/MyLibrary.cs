@@ -142,6 +142,19 @@ namespace MyLibrary
                     item2.transform.position = pos;
                     item2.GetComponent<ParticleSystem>().Play();
                     break;
+                }           
+            }
+        }
+
+        public static void BodyStain(List<GameObject> BodyStain, GameObject Obje)
+        {
+            foreach (var item2 in BodyStain)
+            {
+                if (!item2.activeInHierarchy)
+                {
+                    item2.SetActive(true);
+                    item2.transform.position = Obje.transform.position;
+                    break;
                 }
             }
         }

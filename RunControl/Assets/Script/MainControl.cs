@@ -11,6 +11,8 @@ public class MainControl : MonoBehaviour
     public List<GameObject> NpcPooling;
     public List<GameObject> DeadEffectPooling;
     public List<GameObject> CreatEffectPooling;
+    public List<GameObject> BodyStainPooling;
+
     public static int NpcAmount;
     void Start()
     {
@@ -36,9 +38,14 @@ public class MainControl : MonoBehaviour
     }
 
    
-    public void DeadEffects(GameObject item)
-    {
-      MathOperations.EffectPoolingManager(DeadEffectPooling,item);
-        NpcAmount--;
+    public void DeadEffects(GameObject item,bool BodyStain)
+    { 
+        MathOperations.EffectPoolingManager(DeadEffectPooling, item);
+        NpcAmount--;     
+        if (BodyStain)
+        {
+            MathOperations.BodyStain(BodyStainPooling, item);
+        }
+  
     }
 }
