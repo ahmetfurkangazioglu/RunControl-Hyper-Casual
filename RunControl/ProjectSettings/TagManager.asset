@@ -12,6 +12,8 @@ TagManager:
   - Multiply
   - Npc
   - Hamer
+  - FinalCollider
+  - EnemyNpc
   layers:
   - Default
   - TransparentFX

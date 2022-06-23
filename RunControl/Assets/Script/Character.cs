@@ -5,23 +5,32 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public MainControl mainControl;
+    public Camera MyCam;
+     bool isStartFight;
+    public GameObject MidArea;
     private void FixedUpdate()
     {
+        if(!isStartFight)
         transform.Translate(Vector3.forward * .5f * Time.deltaTime);
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (!isStartFight)
         {
-            if (Input.GetAxis("Mouse X")<0)
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
-            }
-            if (Input.GetAxis("Mouse X") > 0)
-            {
-               transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                if (Input.GetAxis("Mouse X") < 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
+                }
+                if (Input.GetAxis("Mouse X") > 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                }
             }
         }
+        else       
+           transform.position = Vector3.Lerp(transform.position, MidArea.transform.position, .007f);         
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +38,12 @@ public class Character : MonoBehaviour
         if (other.CompareTag("Divided")|| other.CompareTag("Multiply")|| other.CompareTag("Minus")|| other.CompareTag("Plus"))
         {
             mainControl.NpcCharacterManager(other.gameObject.tag, int.Parse(other.name) ,other.transform);
+        }
+        if (other.CompareTag("FinalCollider"))
+        {
+            mainControl.StartFinalFight();
+            MyCam.GetComponent<CameraFollow>().isStartFightCam = true;
+            isStartFight = true;
         }
     }
 }

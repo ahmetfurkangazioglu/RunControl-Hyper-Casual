@@ -7,16 +7,23 @@ using MyLibrary;
 public class MainControl : MonoBehaviour
 {
     public GameObject Target;
-    public GameObject Deneme;
     public List<GameObject> NpcPooling;
+    public static int NpcAmount;
+    public bool isStartFight;
+
+    [Header("EffectsSettings")]
     public List<GameObject> DeadEffectPooling;
     public List<GameObject> CreatEffectPooling;
     public List<GameObject> BodyStainPooling;
 
-    public static int NpcAmount;
+
+    [Header("EnemySettings")]
+    public List<GameObject> EnemyPooling;
+    public int HowManyhEnemies;
     void Start()
     {
         NpcAmount = 1;
+        CreateEnemy();
     }
     public void NpcCharacterManager(string Value,int Number,Transform position)
     {
@@ -38,14 +45,64 @@ public class MainControl : MonoBehaviour
     }
 
    
-    public void DeadEffects(GameObject item,bool BodyStain)
+    public void DeadEffects(GameObject item,bool BodyStain,bool isDeadNpc)
     { 
         MathOperations.EffectPoolingManager(DeadEffectPooling, item);
-        NpcAmount--;     
+
+        FinalFightControl(isDeadNpc);
         if (BodyStain)
         {
             MathOperations.BodyStain(BodyStainPooling, item);
         }
-  
+        
+    }
+    private void CreateEnemy()
+    {
+        for (int i = 0; i < HowManyhEnemies; i++)
+        {
+            EnemyPooling[i].SetActive(true);                                         
+        }
+    }
+
+    public void StartFinalFight()
+    {
+        FightResult();
+        isStartFight = true;
+        foreach (var item in EnemyPooling)
+        {    
+          if (item.activeInHierarchy)
+         {
+           item.GetComponent<EnemyNpc>().AnimationTrriger();
+         }          
+        }
+    }
+
+    private void FightResult()
+    {
+        if (NpcAmount==1 || HowManyhEnemies==0)
+        {
+            isStartFight = false;
+            if (HowManyhEnemies == 0)
+            {
+                Debug.Log("Win");
+                //win
+            }
+            else if (NpcAmount==1)
+            {
+                Debug.Log("Lose");
+                //lose
+            }
+        }
+    }
+
+    private void FinalFightControl(bool isDeadNpc)
+    {
+        if (isDeadNpc)
+            NpcAmount--;
+        else
+            HowManyhEnemies--;
+
+        if (isStartFight)
+            FightResult();
     }
 }
