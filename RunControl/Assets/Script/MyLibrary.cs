@@ -14,13 +14,7 @@ namespace MyLibrary
             {
                 if (Commit < ForValue)
                 {
-                    if (!item.activeInHierarchy)
-                    {
-                        item.transform.position = position.position;
-                        item.SetActive(true);
-                        EffectPoolingManager(CreateEffectPooling, item);
-                        Commit++;
-                    }
+                    NpcPoolPositive(Commit, item, position, CreateEffectPooling, out Commit);
                 }
                 else
                 {
@@ -38,13 +32,7 @@ namespace MyLibrary
             {
                 if (Commit < Value)
                 {
-                    if (!item.activeInHierarchy)
-                    {                   
-                        item.transform.position = position.position;
-                        item.SetActive(true);
-                        EffectPoolingManager(CreateEffectPooling, item);
-                        Commit++;
-                    }
+                    NpcPoolPositive(Commit, item, position, CreateEffectPooling,out Commit);
                 }
                 else
                 {
@@ -53,7 +41,7 @@ namespace MyLibrary
                 }
 
             }
-        }
+        }    
         public static void Minus(int Value, List<GameObject> NpcPooling, List<GameObject> DeadEffectPooling)
         {
 
@@ -62,25 +50,13 @@ namespace MyLibrary
             {
                 if (Value>= MainControl.NpcAmount)
                 {
-                    if (item.activeInHierarchy)
-                    {
-                        EffectPoolingManager(DeadEffectPooling, item);
-                        item.transform.position = Vector3.zero;
-                        item.SetActive(false);
-                        MainControl.NpcAmount = 1;
-                    }
+                    NpcPoolNegative(Commit, item, DeadEffectPooling, true, out Commit);
                 }
                 else
                 {
                     if (Commit < Value)
                     {
-                        if (item.activeInHierarchy)
-                        {
-                            EffectPoolingManager(DeadEffectPooling, item);
-                            item.transform.position = Vector3.zero;
-                            item.SetActive(false);
-                            Commit++;
-                        }
+                        NpcPoolNegative(Commit, item, DeadEffectPooling, false, out Commit);
                     }
                     else
                     {
@@ -91,7 +67,7 @@ namespace MyLibrary
                 }
 
             }
-        }
+        }    
         public static void Divided(int Value, List<GameObject> NpcPooling, List<GameObject> DeadEffectPooling)
         {
             int Mod = MainControl.NpcAmount % Value;
@@ -101,25 +77,13 @@ namespace MyLibrary
             {
                 if (Value >= MainControl.NpcAmount)
                 {
-                    if (item.activeInHierarchy)
-                    {
-                        EffectPoolingManager(DeadEffectPooling, item);
-                        item.transform.position = Vector3.zero;
-                        item.SetActive(false);
-                        MainControl.NpcAmount = 1;
-                    }
+                   NpcPoolNegative(Commit, item, DeadEffectPooling, true, out Commit);
                 }
                 else
                 {
                     if (Commit < ForValue)
                     {
-                        if (item.activeInHierarchy)
-                        {
-                            EffectPoolingManager(DeadEffectPooling, item);
-                            item.transform.position = Vector3.zero;
-                            item.SetActive(false);
-                            Commit++;
-                        }
+                        NpcPoolNegative(Commit, item, DeadEffectPooling, false, out Commit);
                     }
                     else
                     {                      
@@ -145,7 +109,6 @@ namespace MyLibrary
                 }           
             }
         }
-
         public static void BodyStain(List<GameObject> BodyStain, GameObject Obje)
         {
             foreach (var item2 in BodyStain)
@@ -157,6 +120,33 @@ namespace MyLibrary
                     break;
                 }
             }
+        }
+        private static void NpcPoolPositive(int Commit, GameObject Npc, Transform position, List<GameObject> CreateEffectPooling, out int OutNumber)
+        {
+            if (!Npc.activeInHierarchy)
+            {
+                Npc.transform.position = position.position;
+                Npc.SetActive(true);
+                EffectPoolingManager(CreateEffectPooling, Npc);
+                Commit++;
+            }
+            OutNumber = Commit;
+        }
+        private static void NpcPoolNegative(int Commit, GameObject Npc, List<GameObject> DeadEffectPooling, bool reset, out int OutNumber)
+        {
+            if (Npc.activeInHierarchy)
+            {
+                EffectPoolingManager(DeadEffectPooling, Npc);
+                Npc.transform.position = Vector3.zero;
+                Npc.SetActive(false);
+                if (!reset)
+                {
+                    Commit++;
+                }
+                else
+                    MainControl.NpcAmount = 1;
+            }
+            OutNumber = Commit;
         }
     }
 }

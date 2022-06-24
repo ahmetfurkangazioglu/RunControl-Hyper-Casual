@@ -46,4 +46,15 @@ public class Character : MonoBehaviour
             isStartFight = true;
         }
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Column")|| collision.gameObject.CompareTag("NeedleBox"))
+        {
+            if (gameObject.transform.position.x<0)
+                transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y, transform.position.z);
+            else
+                transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y, transform.position.z);
+        }
+    }
 }
