@@ -15,6 +15,7 @@ TagManager:
   - FinalCollider
   - EnemyNpc
   - Column
+  - FreeNpc
   layers:
   - Default
   - TransparentFX
