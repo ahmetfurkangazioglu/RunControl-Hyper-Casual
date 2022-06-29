@@ -10,6 +10,7 @@ public class MainControl : MonoBehaviour
     public List<GameObject> NpcPooling;
     public static int NpcAmount;
     public bool isStartFight;
+    MemoryManager memoryManager = new MemoryManager();
 
     [Header("EffectsSettings")]
     public List<GameObject> DeadEffectPooling;
@@ -81,9 +82,6 @@ public class MainControl : MonoBehaviour
     {
         if (NpcAmount==1 || HowManyhEnemies==0)
         {
-            isStartFight = false;
-            Debug.Log(HowManyhEnemies);
-            Debug.Log(NpcAmount);
             if (HowManyhEnemies == 0)
             {
                 Debug.Log("Win");
