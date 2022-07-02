@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace MyLibrary
 {
     public class MathOperations
@@ -186,4 +188,47 @@ namespace MyLibrary
             }
         }
     }
+
+    public class MyData
+    {
+     public static List<ItemInfo> _ItemInfo = new List<ItemInfo>();
+    }
+
+    public class DataManager
+    {
+        public void Save(List<ItemInfo> ItemInfo,string FileName,string FileMode="gd")
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath +"/"+FileName+"."+FileMode);
+            bf.Serialize(file, ItemInfo);
+            file.Close();
+        }
+        List<ItemInfo> IteminList;
+        public void Load(string FileName, string FileMode = "gd")
+        {
+            if (File.Exists(Application.persistentDataPath + "/" + FileName + "." + FileMode))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.OpenRead(Application.persistentDataPath + "/" + FileName + "." + FileMode);
+                IteminList = (List<ItemInfo>)bf.Deserialize(file);
+                file.Close();
+            }
+        }
+
+        public List<ItemInfo> GetDataList()
+        {
+            return IteminList;
+        }
+    }
+
+    [Serializable]
+    public class ItemInfo
+    {
+        public int ItemGroup;
+        public int ItemId;
+        public string ItemName;
+        public int Point;
+        public bool Bought;
+    }
+
 }
