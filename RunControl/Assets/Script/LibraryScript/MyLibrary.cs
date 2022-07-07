@@ -185,13 +185,12 @@ namespace MyLibrary
             {
                 Save_int("CurrentLevel", 5);
                 Save_int("TotalPoint", 100);
+                Save_int("HatIndex", -1);
+                Save_int("WeaponIndex", -1);
+                Save_int("MaterialIndex", -1);
+
             }
         }
-    }
-
-    public class MyData
-    {
-     public static List<ItemInfo> _ItemInfo = new List<ItemInfo>();
     }
 
     public class DataManager

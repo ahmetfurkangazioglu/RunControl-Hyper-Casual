@@ -1159,7 +1159,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 803426960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1308166292}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: Saveitem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &803426960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,8 +1328,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a89a61b12a735c145884a7620f3044cd, type: 2}
   - {fileID: 2100000, guid: 52d3a5b2b03e1064fbfc4523f3eac7c3, type: 2}
   - {fileID: 2100000, guid: 58ddc1e9aa445c24a9b130fd6a800783, type: 2}
-  Currentindex: -1
   itemNames: {fileID: 114850621}
+  BuyAndSaveButtom:
+  - {fileID: 1443472621}
+  - {fileID: 803426959}
   buttons:
   - {fileID: 1431779554}
   - {fileID: 1391511881}
@@ -1667,7 +1681,7 @@ GameObject:
   - component: {fileID: 1443472622}
   - component: {fileID: 1443472621}
   m_Layer: 5
-  m_Name: SellBut
+  m_Name: BuyBut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1736,7 +1750,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1443472622}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1308166292}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: Buyitem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1443472622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2963,7 +2989,7 @@ GameObject:
   - component: {fileID: 2035523220}
   - component: {fileID: 2035523219}
   m_Layer: 5
-  m_Name: SellText
+  m_Name: BuyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3035,7 +3061,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.55
+  m_fontSize: 114.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3071,7 +3097,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 26.501999, y: 26.555069, z: 28.960785, w: 26.183723}
+  m_margin: {x: 13.7052765, y: 6.7899323, z: 14.760895, w: 14.55349}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
