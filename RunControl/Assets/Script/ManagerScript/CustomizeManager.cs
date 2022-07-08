@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MyLibrary;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CustomizeManager : MonoBehaviour
 {
@@ -26,31 +27,33 @@ public class CustomizeManager : MonoBehaviour
 
     [Header("General Operation")]
     int Currentindex;
+    int Point;
+    int SavedItem;
+    public Animator anim;
+    public Text PointText;
     public Text itemNames;
     public Button[] BuyAndSaveButtom;
     public Button[] buttons;
     public GameObject[] GeneralPanel;
-    public List<ItemInfo> _ItemInfo = new List<ItemInfo>();
+     List<ItemInfo> _ItemInfo = new List<ItemInfo>();
 
     MemoryManager memory = new MemoryManager();
     DataManager dataManager = new DataManager();
-
-
     void Start()
     {
+        Point =memory.Get_int("TotalPoint");
+        PointText.text = Point.ToString();
         SetItem(false, Hatitems, null, memory.Get_int("HatIndex"));
         SetItem(false, Weaponitems, null, memory.Get_int("WeaponIndex"));
         SetItem(true, null, NinjaMat, memory.Get_int("MaterialIndex"));
         dataManager.Load("ItemDatas");
         _ItemInfo = dataManager.GetDataList();
     }
-
     public void ChangeItem(string ButtonName)
     {
         switch (isOperationMat)
         {
             case false:
-
                 if (ButtonName == "Next")
                 {
                     if (Currentindex != -1)
@@ -58,24 +61,23 @@ public class CustomizeManager : MonoBehaviour
                         items[Currentindex].SetActive(false);
                     }
                     Currentindex++;
-                    items[Currentindex].SetActive(true);
-                   BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() +"- Satýn al";
+                    BuyAndSaveButManager();
+                   items[Currentindex].SetActive(true);
                     itemNames.text = _ItemInfo[Currentindex + AddedÝndex].ItemName;
                     buttons[0].interactable = true;
                     if (Currentindex == items.Length - 1)
                     {
                         buttons[1].interactable = false;
                     }
-
                 }
                 else
                 {
                     items[Currentindex].SetActive(false);
                     Currentindex--;
+                    BuyAndSaveButManager();
                     buttons[1].interactable = true;
                     if (Currentindex != -1)
                     {
-                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "- Satýn al";
                         items[Currentindex].SetActive(true);
                         itemNames.text = _ItemInfo[Currentindex + AddedÝndex].ItemName;
                     }
@@ -85,19 +87,16 @@ public class CustomizeManager : MonoBehaviour
                         buttons[0].interactable = false;
                         itemNames.text = itemName;
                     }
-
                 }
              break;
-
             case true:
-
                 if (ButtonName == "Next")
                 {
                     Currentindex++;
+                    BuyAndSaveButManager();
                     Material[] mats = _meshRender.materials;
                     mats[0] = material[Currentindex];
                     _meshRender.material = mats[0];
-                    BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "- Satýn al";
                     itemNames.text = _ItemInfo[Currentindex + AddedÝndex].ItemName;
                     buttons[0].interactable = true;
                     if (Currentindex == material.Length - 1)
@@ -108,13 +107,13 @@ public class CustomizeManager : MonoBehaviour
                 else
                 {
                     Currentindex--;
+                    BuyAndSaveButManager();
                     buttons[1].interactable = true;
                     if (Currentindex != -1)
                     {
                         Material[] mats = _meshRender.materials;
                         mats[0] = material[Currentindex];
                         _meshRender.material = mats[0];
-                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "- Satýn al";
                         itemNames.text = _ItemInfo[Currentindex + AddedÝndex].ItemName;
                     }
                     else
@@ -126,14 +125,19 @@ public class CustomizeManager : MonoBehaviour
                         buttons[0].interactable = false;
                         itemNames.text = itemName;
                     }
-
                 }
                 break;
         }       
     }
     public void Buyitem()
     {
-
+        BuyAndSaveButtom[0].interactable = false;
+        BuyAndSaveButtom[1].interactable = true;
+        Point = Point - _ItemInfo[Currentindex + AddedÝndex].Point;
+        PointText.text = Point.ToString();
+        memory.Save_int("TotalPoint", Point);
+        _ItemInfo[Currentindex + AddedÝndex].Bought = true;
+        dataManager.Save(_ItemInfo,"ItemDatas");
     }
     public void Saveitem()
     {
@@ -150,11 +154,16 @@ public class CustomizeManager : MonoBehaviour
                 memory.Save_int("MaterialIndex", Currentindex);
                 break;
         }
+        anim.SetBool("Play", true);
+        SavedItem = Currentindex;
+        BuyAndSaveButtom[1].interactable = false;
     }
-
     public void OpenOperationPanel(string Operation)
     {
-        ChooseOperation(Operation);    
+        ChooseOperation(Operation);
+        BuyAndSaveButtom[0].interactable = false;
+        BuyAndSaveButtom[1].interactable = false;
+        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = "Satýn Alýndý";
         GeneralPanel[0].SetActive(false);
         GeneralPanel[1].SetActive(true);
         GeneralPanel[2].SetActive(true);
@@ -169,7 +178,10 @@ public class CustomizeManager : MonoBehaviour
         SetItem(isOperationMat,items, material, CurrentItenIndex(OperationName));
         AddedÝndex = 0;
     }
-
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void ChooseOperation(string Operation)
     {
         switch (Operation)
@@ -180,7 +192,7 @@ public class CustomizeManager : MonoBehaviour
                 isOperationMat = false;
                 itemName = "Þapka Yok";
                 OperationName = "Hat";
-                Currentindex= memory.Get_int("HatIndex");
+                Currentindex= memory.Get_int("HatIndex");         
                 buttonCheck(items.Length);
                 break;
 
@@ -204,6 +216,7 @@ public class CustomizeManager : MonoBehaviour
                 buttonCheck(material.Length);
                 break;
         }
+        SavedItem = Currentindex;
     }
     private void SetItem(bool IsMat, GameObject[] items, Material[] mat,int Index)
     {
@@ -215,7 +228,7 @@ public class CustomizeManager : MonoBehaviour
                        items[i].SetActive(false);          
                     else
                        items[i].SetActive(true);
-            }
+                }
             }
             else
             {
@@ -258,5 +271,41 @@ public class CustomizeManager : MonoBehaviour
             buttons[1].interactable = false;
         }
           
+    }
+    private void BuyAndSaveButManager()
+    {
+        if (Currentindex != -1)
+        {
+            BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "- Satýn al";
+            if (_ItemInfo[Currentindex + AddedÝndex].Bought)
+            {
+                BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = "Satýn Alýndý";
+                SaveSitatu();
+            }
+            else
+            {
+                BuyAndSaveButtom[1].interactable = false;
+                if (_ItemInfo[Currentindex + AddedÝndex].Point <= Point)
+                {
+                    BuyAndSaveButtom[0].interactable = true;
+                }
+                else
+                {
+                    BuyAndSaveButtom[0].interactable = false;
+                }
+            }
+        }
+        else
+        {
+            SaveSitatu();
+        }
+    }
+    private void SaveSitatu()
+    {
+        BuyAndSaveButtom[0].interactable = false;
+        if (SavedItem == Currentindex)
+            BuyAndSaveButtom[1].interactable = false;
+        else
+            BuyAndSaveButtom[1].interactable = true;
     }
 }

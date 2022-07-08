@@ -152,7 +152,6 @@ namespace MyLibrary
             OutNumber = Commit;
         }
     }
-
     public class MemoryManager
     {
         public void Save_int(string Name, int Value)
@@ -183,8 +182,9 @@ namespace MyLibrary
         {
             if (!PlayerPrefs.HasKey("FinalLevel"))
             {
+                Save_string("FinalLevel", null);
                 Save_int("CurrentLevel", 5);
-                Save_int("TotalPoint", 100);
+                Save_int("TotalPoint", 850);
                 Save_int("HatIndex", -1);
                 Save_int("WeaponIndex", -1);
                 Save_int("MaterialIndex", -1);
@@ -192,15 +192,24 @@ namespace MyLibrary
             }
         }
     }
-
     public class DataManager
     {
         public void Save(List<ItemInfo> ItemInfo,string FileName,string FileMode="gd")
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath +"/"+FileName+"."+FileMode);
+            FileStream file = File.OpenWrite(Application.persistentDataPath +"/"+FileName+"."+FileMode);
             bf.Serialize(file, ItemInfo);
             file.Close();
+        }
+        public void FirstSave(List<ItemInfo> ItemInfo, string FileName, string FileMode = "gd")
+        {
+            if (!File.Exists(Application.persistentDataPath + "/" + FileName + "." + FileMode))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/" + FileName + "." + FileMode);
+                bf.Serialize(file, ItemInfo);
+                file.Close();
+            }
         }
         List<ItemInfo> IteminList;
         public void Load(string FileName, string FileMode = "gd")
@@ -213,13 +222,11 @@ namespace MyLibrary
                 file.Close();
             }
         }
-
         public List<ItemInfo> GetDataList()
         {
             return IteminList;
         }
     }
-
     [Serializable]
     public class ItemInfo
     {
@@ -229,5 +236,4 @@ namespace MyLibrary
         public int Point;
         public bool Bought;
     }
-
 }

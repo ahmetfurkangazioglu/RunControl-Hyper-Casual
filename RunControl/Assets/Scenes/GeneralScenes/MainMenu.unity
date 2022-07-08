@@ -1448,6 +1448,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExitPanel: {fileID: 1988699695}
+  _ItemInfo:
+  - ItemGroup: 1
+    ItemId: 0
+    ItemName: "B\xFCy\xFCl\xFC \u015Eapka"
+    Point: 100
+    Bought: 0
+  - ItemGroup: 1
+    ItemId: 1
+    ItemName: "Dikenli \u015Eapka"
+    Point: 400
+    Bought: 0
+  - ItemGroup: 1
+    ItemId: 2
+    ItemName: "Basit \u015Eapka"
+    Point: 600
+    Bought: 0
+  - ItemGroup: 2
+    ItemId: 0
+    ItemName: "K\u0131l\u0131\xE7"
+    Point: 200
+    Bought: 0
+  - ItemGroup: 2
+    ItemId: 1
+    ItemName: Beyzbol
+    Point: 450
+    Bought: 0
+  - ItemGroup: 2
+    ItemId: 2
+    ItemName: "\xC7eki\xE7"
+    Point: 650
+    Bought: 0
+  - ItemGroup: 3
+    ItemId: 0
+    ItemName: "Tatl\u0131 Ninja"
+    Point: 150
+    Bought: 0
+  - ItemGroup: 3
+    ItemId: 1
+    ItemName: Basit Ninja
+    Point: 500
+    Bought: 0
+  - ItemGroup: 3
+    ItemId: 2
+    ItemName: "G\xF6lge Ninja"
+    Point: 800
+    Bought: 0
+  - ItemGroup: 3
+    ItemId: 3
+    ItemName: Efsane Ninja
+    Point: 1500
+    Bought: 0
 --- !u!4 &534792942
 Transform:
   m_ObjectHideFlags: 0

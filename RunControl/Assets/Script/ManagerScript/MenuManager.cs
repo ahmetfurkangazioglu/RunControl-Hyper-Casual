@@ -8,8 +8,11 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject ExitPanel;
     MemoryManager memoryManager = new MemoryManager();
+    DataManager dataManager = new DataManager();
+    public List<ItemInfo> _ItemInfo = new List<ItemInfo>();
     void Start()
     {
+        dataManager.FirstSave(_ItemInfo,"ItemDatas");
         memoryManager.PrefsControl();
     }
     public void LoadScenes(int index)
@@ -36,7 +39,4 @@ public class MenuManager : MonoBehaviour
                 break;
         }
     }
-
-
-
 }

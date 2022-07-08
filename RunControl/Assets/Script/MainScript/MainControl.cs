@@ -17,12 +17,18 @@ public class MainControl : MonoBehaviour
     public List<GameObject> CreatEffectPooling;
     public List<GameObject> BodyStainPooling;
 
-
     [Header("EnemySettings")]
     public List<GameObject> EnemyPooling;
     public int HowManyhEnemies;
+
+    [Header("Hat Operation")]
+    public GameObject[] Hatitems;
+    public GameObject[] Weaponitems;
+    public SkinnedMeshRenderer _meshRender;
+    public Material[] NinjaMat;
     void Start()
     {
+        SetItem();
         NpcAmount = 1;
         CreateEnemy();
     }
@@ -104,5 +110,20 @@ public class MainControl : MonoBehaviour
 
         if (isStartFight)
             FightResult();
+    }
+
+    private void SetItem()
+    {
+        if (memoryManager.Get_int("MaterialIndex") != -1)
+        {
+            Material[] mats = _meshRender.materials;
+            mats[0] = NinjaMat[memoryManager.Get_int("MaterialIndex")];
+            _meshRender.material = mats[0];
+        }
+        if (memoryManager.Get_int("HatIndex") != -1)
+            Hatitems[(memoryManager.Get_int("HatIndex"))].SetActive(true);
+        if (memoryManager.Get_int("WeaponIndex") != -1)
+            Weaponitems[(memoryManager.Get_int("WeaponIndex"))].SetActive(true);
+
     }
 }
