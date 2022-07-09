@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MyLibrary;
+using UnityEngine.SceneManagement;
 
 
 public class MainControl : MonoBehaviour
 {
+    Scene scene;
     public GameObject Target;
     public List<GameObject> NpcPooling;
     public static int NpcAmount;
     public bool isStartFight;
+    public AudioSource[] GeneralSound;
+    public GameObject[] GeneralPanel;
+    public Slider SoundSlider;
     MemoryManager memoryManager = new MemoryManager();
 
     [Header("EffectsSettings")]
@@ -28,9 +34,14 @@ public class MainControl : MonoBehaviour
     public Material[] NinjaMat;
     void Start()
     {
+        Destroy(GameObject.FindWithTag("SoundManager"));
+        scene = SceneManager.GetActiveScene();
         SetItem();
         NpcAmount = 1;
         CreateEnemy();
+        GeneralSound[0].volume = memoryManager.Get_Float("FxSound");
+        GeneralSound[1].volume = memoryManager.Get_Float("GameSound");
+        SoundSlider.value= memoryManager.Get_Float("GameSound");
     }
     public void NpcCharacterManager(string Value,int Number,Transform position)
     {
@@ -50,8 +61,6 @@ public class MainControl : MonoBehaviour
                 break;
         }
     }
-
-   
     public void DeadEffects(GameObject item,bool BodyStain,bool isDeadNpc)
     { 
         MathOperations.EffectPoolingManager(DeadEffectPooling, item);
@@ -70,7 +79,6 @@ public class MainControl : MonoBehaviour
             EnemyPooling[i].SetActive(true);                                         
         }
     }
-
     public void StartFinalFight()
     {
         FightResult();
@@ -83,7 +91,6 @@ public class MainControl : MonoBehaviour
          }          
         }
     }
-
     private void FightResult()
     {
         if (NpcAmount==1 || HowManyhEnemies==0)
@@ -100,7 +107,6 @@ public class MainControl : MonoBehaviour
             }
         }
     }
-
     private void FinalFightControl(bool isDeadNpc)
     {
         if (isDeadNpc)
@@ -111,7 +117,6 @@ public class MainControl : MonoBehaviour
         if (isStartFight)
             FightResult();
     }
-
     private void SetItem()
     {
         if (memoryManager.Get_int("MaterialIndex") != -1)
@@ -125,5 +130,48 @@ public class MainControl : MonoBehaviour
         if (memoryManager.Get_int("WeaponIndex") != -1)
             Weaponitems[(memoryManager.Get_int("WeaponIndex"))].SetActive(true);
 
+    }
+    public void SoundSettings(string Settings)
+    {
+        switch (Settings)
+        {
+            case "Settings":
+                Time.timeScale = 0;
+                GeneralSound[0].Play();
+                GeneralPanel[0].SetActive(true);
+                break;
+            case "Sound":
+                GeneralSound[1].volume = SoundSlider.value;
+               memoryManager.Save_float("GameSound", SoundSlider.value);
+                break;
+            case "Close":
+                GeneralSound[0].Play();
+                GeneralPanel[0].SetActive(false);
+                Time.timeScale = 1;
+                break;
+        }
+    }
+    public void Quit(string exit)
+    {
+        GeneralSound[0].Play();
+        Time.timeScale = 0;
+        switch (exit)
+        {          
+            case "Stop":
+                GeneralPanel[1].SetActive(true);
+                break;
+            case "Restart":
+                SceneManager.LoadScene(scene.buildIndex);
+                Time.timeScale = 1;
+                break;
+            case "Continue":
+                GeneralPanel[1].SetActive(false);
+                Time.timeScale = 1;
+                break;
+            case "BackMenu":
+                SceneManager.LoadScene(0);
+                Time.timeScale = 1;
+                break;
+        }
     }
 }

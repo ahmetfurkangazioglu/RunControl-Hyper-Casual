@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public Button[] Buttons;
     public Sprite LockSprite;
     public int LevelIndex =4;
+    public AudioSource ButtonSound;
     int CurrentLevel;
     void Start()
     {
@@ -36,6 +37,7 @@ public class LevelManager : MonoBehaviour
     } 
     public void LoadScene(int index)
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(index);
     }
 

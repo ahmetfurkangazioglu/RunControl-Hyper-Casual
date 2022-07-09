@@ -16,6 +16,7 @@ TagManager:
   - EnemyNpc
   - Column
   - FreeNpc
+  - SoundManager
   layers:
   - Default
   - TransparentFX

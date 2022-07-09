@@ -188,7 +188,9 @@ namespace MyLibrary
                 Save_int("HatIndex", -1);
                 Save_int("WeaponIndex", -1);
                 Save_int("MaterialIndex", -1);
-
+                Save_float("GameSound", .6f);
+                Save_float("MenuSound", .6f);
+                Save_float("FxSound", .6f);
             }
         }
     }

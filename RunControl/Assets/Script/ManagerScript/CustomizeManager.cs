@@ -35,6 +35,7 @@ public class CustomizeManager : MonoBehaviour
     public Button[] BuyAndSaveButtom;
     public Button[] buttons;
     public GameObject[] GeneralPanel;
+    public AudioSource[] GeneralSounds;
      List<ItemInfo> _ItemInfo = new List<ItemInfo>();
 
     MemoryManager memory = new MemoryManager();
@@ -51,6 +52,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void ChangeItem(string ButtonName)
     {
+        GeneralSounds[0].Play();
         switch (isOperationMat)
         {
             case false:
@@ -131,6 +133,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void Buyitem()
     {
+        GeneralSounds[1].Play();
         BuyAndSaveButtom[0].interactable = false;
         BuyAndSaveButtom[1].interactable = true;
         Point = Point - _ItemInfo[Currentindex + Added›ndex].Point;
@@ -141,6 +144,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void Saveitem()
     {
+        GeneralSounds[2].Play();
         switch (OperationName)
         {
             case "Hat":
@@ -160,6 +164,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void OpenOperationPanel(string Operation)
     {
+        GeneralSounds[0].Play();
         ChooseOperation(Operation);
         BuyAndSaveButtom[0].interactable = false;
         BuyAndSaveButtom[1].interactable = false;
@@ -170,6 +175,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void CloseOperationPanel()
     {
+        GeneralSounds[0].Play();
         buttons[0].interactable = true;
         buttons[1].interactable = true;
         GeneralPanel[0].SetActive(true);
@@ -180,6 +186,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        GeneralSounds[0].Play();
         SceneManager.LoadScene(0);
     }
     private void ChooseOperation(string Operation)
