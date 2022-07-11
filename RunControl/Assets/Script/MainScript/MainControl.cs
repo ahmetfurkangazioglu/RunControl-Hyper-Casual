@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MyLibrary;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class MainControl : MonoBehaviour
@@ -32,16 +33,20 @@ public class MainControl : MonoBehaviour
     public GameObject[] Weaponitems;
     public SkinnedMeshRenderer _meshRender;
     public Material[] NinjaMat;
+    [Header("LanguageSettings")]
+    public TextMeshProUGUI[] AllText;
+    public List<LanguageSet> languageMainData = new List<LanguageSet>();
+    List<LanguageSet> languageText = new List<LanguageSet>();
+    DataManager dataManager = new DataManager();
     void Start()
     {
-        Destroy(GameObject.FindWithTag("SoundManager"));
         scene = SceneManager.GetActiveScene();
-        SetItem();
         NpcAmount = 1;
+        Destroy(GameObject.FindWithTag("SoundManager"));
+        LanguageManager();
+        SetItem();
         CreateEnemy();
-        GeneralSound[0].volume = memoryManager.Get_Float("FxSound");
-        GeneralSound[1].volume = memoryManager.Get_Float("GameSound");
-        SoundSlider.value= memoryManager.Get_Float("GameSound");
+        SetVolume();
     }
     public void NpcCharacterManager(string Value,int Number,Transform position)
     {
@@ -173,5 +178,34 @@ public class MainControl : MonoBehaviour
                 Time.timeScale = 1;
                 break;
         }
+    }
+    private void SetLanguage(string Value)
+    {
+        if (Value == "TR")
+        {
+            for (int i = 0; i < AllText.Length; i++)
+            {
+                AllText[i].text = languageText[0].Language_TR[i].Text;
+            }
+        }
+        else if (Value == "EN")
+        {
+            for (int i = 0; i < AllText.Length; i++)
+            {
+                AllText[i].text = languageText[0].Language_EN[i].Text;
+            }
+        }
+    }
+    void SetVolume()
+    {
+        GeneralSound[0].volume = memoryManager.Get_Float("FxSound");
+        GeneralSound[1].volume = memoryManager.Get_Float("GameSound");
+        SoundSlider.value = memoryManager.Get_Float("GameSound");
+    }
+    void LanguageManager()
+    {
+        languageMainData = dataManager.LoadLanguageList();
+        languageText.Add(languageMainData[1]);
+        SetLanguage(memoryManager.Get_String("Language"));
     }
 }

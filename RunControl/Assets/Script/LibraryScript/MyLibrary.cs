@@ -191,11 +191,14 @@ namespace MyLibrary
                 Save_float("GameSound", .6f);
                 Save_float("MenuSound", .6f);
                 Save_float("FxSound", .6f);
+                Save_string("Language", "EN");
             }
         }
     }
     public class DataManager
     {
+        List<ItemInfo> IteminList;
+        List<LanguageSet> LanguageList;
         public void Save(List<ItemInfo> ItemInfo,string FileName,string FileMode="gd")
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -203,17 +206,23 @@ namespace MyLibrary
             bf.Serialize(file, ItemInfo);
             file.Close();
         }
-        public void FirstSave(List<ItemInfo> ItemInfo, string FileName, string FileMode = "gd")
+        public void FirstSave(List<ItemInfo> ItemInfo=null, List<LanguageSet> languageSet=null)
         {
-            if (!File.Exists(Application.persistentDataPath + "/" + FileName + "." + FileMode))
+            if (!File.Exists(Application.persistentDataPath + "/ItemDatas.gd"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Create(Application.persistentDataPath + "/" + FileName + "." + FileMode);
+                FileStream file = File.Create(Application.persistentDataPath + "/ItemDatas.gd");
                 bf.Serialize(file, ItemInfo);
                 file.Close();
             }
+            if (!File.Exists(Application.persistentDataPath +"/LanguageText.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/LanguageText.gd");
+                bf.Serialize(file, languageSet);
+                file.Close();
+            }
         }
-        List<ItemInfo> IteminList;
         public void Load(string FileName, string FileMode = "gd")
         {
             if (File.Exists(Application.persistentDataPath + "/" + FileName + "." + FileMode))
@@ -223,6 +232,18 @@ namespace MyLibrary
                 IteminList = (List<ItemInfo>)bf.Deserialize(file);
                 file.Close();
             }
+        }
+        public List<LanguageSet> LoadLanguageList()
+        {
+            if (File.Exists(Application.persistentDataPath + "/LanguageText.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.OpenRead(Application.persistentDataPath + "/LanguageText.gd");
+                LanguageList = (List<LanguageSet>)bf.Deserialize(file);
+                file.Close();
+                return LanguageList;
+            }
+            return null;
         }
         public List<ItemInfo> GetDataList()
         {
@@ -238,4 +259,18 @@ namespace MyLibrary
         public int Point;
         public bool Bought;
     }
+
+    [Serializable]
+    public class LanguageSet
+    {
+       public List<LanguageText> Language_TR = new List<LanguageText>();
+       public List<LanguageText> Language_EN = new List<LanguageText>();
+    }
+
+    [Serializable]
+    public class LanguageText
+    {
+        public string Text;
+    }
+
 }

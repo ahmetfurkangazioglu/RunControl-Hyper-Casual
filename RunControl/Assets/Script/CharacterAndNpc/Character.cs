@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     }
     void Update()
     {
+      if (Time.timeScale!=0)
+      {     
         if (!isStartFight)
         {
             slider.value = Vector3.Distance(transform.position, TargetDsitance.transform.position);
@@ -42,7 +44,7 @@ public class Character : MonoBehaviour
             slider.value -= .005f; 
             transform.position = Vector3.Lerp(transform.position, MidArea.transform.position, .007f);
         }
-                 
+     }
     }
 
     private void OnTriggerEnter(Collider other)

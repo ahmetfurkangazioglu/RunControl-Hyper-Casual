@@ -12,23 +12,30 @@ public class CustomizeManager : MonoBehaviour
     string itemName;
     int AddedÝndex;
     string OperationName;
+    string Buy;
+    string Purchased;
+    int Currentindex;
+    int Point;
+    int SavedItem;
     GameObject[] items;
     Material[] material;
-    [Header("Hat Operation")]
+    [Header("---------------Hat Operation")]
     public GameObject[] Hatitems;
 
-    [Header("Weapon Operation")]
+    [Header("---------------Weapon Operation")]
     public GameObject[] Weaponitems;
 
-   [Header("Ninja Material Operation")]
+   [Header("---------------Ninja Material Operation")]
     public Material DefaultMat;
     public SkinnedMeshRenderer _meshRender;
     public Material[] NinjaMat;
 
-    [Header("General Operation")]
-    int Currentindex;
-    int Point;
-    int SavedItem;
+    [Header("---------------language Operation")]
+    public TextMeshProUGUI[] AllText;
+    public List<LanguageSet> languageMainData = new List<LanguageSet>();
+    List<LanguageSet> languageText = new List<LanguageSet>();
+
+    [Header("---------------General Operation")]
     public Animator anim;
     public Text PointText;
     public Text itemNames;
@@ -42,13 +49,7 @@ public class CustomizeManager : MonoBehaviour
     DataManager dataManager = new DataManager();
     void Start()
     {
-        Point =memory.Get_int("TotalPoint");
-        PointText.text = Point.ToString();
-        SetItem(false, Hatitems, null, memory.Get_int("HatIndex"));
-        SetItem(false, Weaponitems, null, memory.Get_int("WeaponIndex"));
-        SetItem(true, null, NinjaMat, memory.Get_int("MaterialIndex"));
-        dataManager.Load("ItemDatas");
-        _ItemInfo = dataManager.GetDataList();
+        DataAndStartOperation();
     }
     public void ChangeItem(string ButtonName)
     {
@@ -85,7 +86,7 @@ public class CustomizeManager : MonoBehaviour
                     }
                     else
                     {
-                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = "Satýn alýnamaz";
+                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = Purchased;
                         buttons[0].interactable = false;
                         itemNames.text = itemName;
                     }
@@ -123,7 +124,7 @@ public class CustomizeManager : MonoBehaviour
                         Material[] mats = _meshRender.materials;
                         mats[0] = DefaultMat;
                         _meshRender.material = mats[0];
-                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text ="- Satýn alýnamaz";
+                        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = Purchased;
                         buttons[0].interactable = false;
                         itemNames.text = itemName;
                     }
@@ -136,6 +137,7 @@ public class CustomizeManager : MonoBehaviour
         GeneralSounds[1].Play();
         BuyAndSaveButtom[0].interactable = false;
         BuyAndSaveButtom[1].interactable = true;
+        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = Purchased;
         Point = Point - _ItemInfo[Currentindex + AddedÝndex].Point;
         PointText.text = Point.ToString();
         memory.Save_int("TotalPoint", Point);
@@ -168,7 +170,7 @@ public class CustomizeManager : MonoBehaviour
         ChooseOperation(Operation);
         BuyAndSaveButtom[0].interactable = false;
         BuyAndSaveButtom[1].interactable = false;
-        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = "Satýn Alýndý";
+        BuyAndSaveButManager();
         GeneralPanel[0].SetActive(false);
         GeneralPanel[1].SetActive(true);
         GeneralPanel[2].SetActive(true);
@@ -197,7 +199,6 @@ public class CustomizeManager : MonoBehaviour
                 AddedÝndex = 0;
                 items= Hatitems;
                 isOperationMat = false;
-                itemName = "Þapka Yok";
                 OperationName = "Hat";
                 Currentindex= memory.Get_int("HatIndex");         
                 buttonCheck(items.Length);
@@ -207,7 +208,6 @@ public class CustomizeManager : MonoBehaviour
                 AddedÝndex = Hatitems.Length;
                 items= Weaponitems;
                 isOperationMat =false;
-                itemName = "Silah Yok";
                 OperationName = "Weapon";
                 Currentindex = memory.Get_int("WeaponIndex");
                 buttonCheck(items.Length);
@@ -217,13 +217,17 @@ public class CustomizeManager : MonoBehaviour
                 AddedÝndex = Hatitems.Length+Weaponitems.Length;
                 material = NinjaMat;
                 isOperationMat =true;
-                itemName = "Kostüm Yok";
                 OperationName = "Material";
                 Currentindex = memory.Get_int("MaterialIndex");
                 buttonCheck(material.Length);
                 break;
         }
         SavedItem = Currentindex;
+        BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = Purchased;
+        if (Currentindex == -1)
+            itemNames.text = itemName;
+        else
+            itemNames.text = _ItemInfo[Currentindex + AddedÝndex].ItemName;
     }
     private void SetItem(bool IsMat, GameObject[] items, Material[] mat,int Index)
     {
@@ -283,10 +287,10 @@ public class CustomizeManager : MonoBehaviour
     {
         if (Currentindex != -1)
         {
-            BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "- Satýn al";
+            BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = _ItemInfo[Currentindex + AddedÝndex].Point.ToString() + "-"+ Buy;
             if (_ItemInfo[Currentindex + AddedÝndex].Bought)
             {
-                BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = "Satýn Alýndý";
+                BuyAndSaveButtom[0].GetComponentInChildren<TextMeshProUGUI>().text = Purchased;
                 SaveSitatu();
             }
             else
@@ -314,5 +318,41 @@ public class CustomizeManager : MonoBehaviour
             BuyAndSaveButtom[1].interactable = false;
         else
             BuyAndSaveButtom[1].interactable = true;
+    }
+    private void SetLanguage(string Value)
+    {
+        if (Value == "TR")
+        {
+            for (int i = 0; i < AllText.Length; i++)
+            {
+                AllText[i].text = languageText[0].Language_TR[i].Text;
+            }
+            itemName = languageText[0].Language_TR[6].Text;
+            Buy= languageText[0].Language_TR[3].Text;
+            Purchased=languageText[0].Language_TR[7].Text;
+        }
+        else if (Value == "EN")
+        {
+            for (int i = 0; i < AllText.Length; i++)
+            {
+                AllText[i].text = languageText[0].Language_EN[i].Text;
+            }
+            itemName = languageText[0].Language_EN[6].Text;
+            Buy = languageText[0].Language_EN[3].Text;
+            Purchased = languageText[0].Language_EN[7].Text;
+        }
+    }
+    private void DataAndStartOperation()
+    {
+        Point = memory.Get_int("TotalPoint");
+        PointText.text = Point.ToString();
+        SetItem(false, Hatitems, null, memory.Get_int("HatIndex"));
+        SetItem(false, Weaponitems, null, memory.Get_int("WeaponIndex"));
+        SetItem(true, null, NinjaMat, memory.Get_int("MaterialIndex"));
+        dataManager.Load("ItemDatas");
+        _ItemInfo = dataManager.GetDataList();
+        languageMainData = dataManager.LoadLanguageList();
+        languageText.Add(languageMainData[2]);
+        SetLanguage(memory.Get_String("Language"));
     }
 }
