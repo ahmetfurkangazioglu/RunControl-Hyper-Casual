@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyLibrary;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    MemoryManager memoryManager = new MemoryManager();
-    DataManager dataManager = new DataManager();
-
     [Header("Other Operation")]
-    public GameObject ExitPanel;
+    public GameObject[] GeneralPanel;
     public AudioSource ButtonSound;
-
+    public Slider LoadingSlider;
     [Header("ItemData")]
     public List<ItemInfo> _ItemInfo = new List<ItemInfo>();
-
     [Header("LanguageSettings")]
     public TextMeshProUGUI[] AllText;
     public List<LanguageSet> languageMainData = new List<LanguageSet>();
+
+    MemoryManager memoryManager = new MemoryManager();
+    DataManager dataManager = new DataManager();
     List<LanguageSet> languageText = new List<LanguageSet>();
+
+    void Awake()
+    {
+        StartOperation();
+    }
     void Start()
     {
-        dataManager.FirstSave(_ItemInfo,languageMainData);
-        memoryManager.PrefsControl();
-        ButtonSound.volume = memoryManager.Get_Float("FxSound");
-        languageText.Add(languageMainData[0]);
-        //memoryManager.Save_string("Language", "TR");
         SetLanguage(memoryManager.Get_String("Language"));
     }
     public void LoadScenes(int index)
@@ -38,25 +38,25 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         ButtonSound.Play();
-        SceneManager.LoadScene(memoryManager.Get_int("CurrentLevel"));
+        StartCoroutine(LoadingAsync());
     }
-    public void Quit(string exit)
+    void Quit(string exit)
     {
         ButtonSound.Play();
         switch (exit)
         {
             case "Sure":
-                ExitPanel.SetActive(true);
+                GeneralPanel[0].SetActive(true);
                 break;
             case "No":
-                ExitPanel.SetActive(false);
+                GeneralPanel[0].SetActive(false);
                 break;
             case "Yes":
                 Application.Quit();
                 break;
         }
     }
-    private void SetLanguage(string Value)
+    void SetLanguage(string Value)
     {
         if (Value=="TR")
         {
@@ -71,6 +71,24 @@ public class MenuManager : MonoBehaviour
             {
                 AllText[i].text = languageText[0].Language_EN[i].Text;
             }
+        }
+    }
+    void StartOperation()
+    {
+        dataManager.FirstSave(_ItemInfo, languageMainData);
+        memoryManager.PrefsControl();
+        ButtonSound.volume = memoryManager.Get_Float("FxSound");
+        languageText.Add(languageMainData[0]);
+    }
+    IEnumerator LoadingAsync()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(memoryManager.Get_int("CurrentLevel"));
+        GeneralPanel[1].SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadingSlider.value = progress;
+            yield return null;
         }
     }
 }

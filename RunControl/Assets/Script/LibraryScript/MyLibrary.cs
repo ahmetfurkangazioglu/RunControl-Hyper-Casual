@@ -250,6 +250,7 @@ namespace MyLibrary
             return IteminList;
         }
     }
+
     [Serializable]
     public class ItemInfo
     {
@@ -272,5 +273,4 @@ namespace MyLibrary
     {
         public string Text;
     }
-
 }

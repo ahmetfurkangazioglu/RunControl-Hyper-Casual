@@ -20,7 +20,6 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void LateUpdate()
     {
         MainSound.volume = PlayerPrefs.GetFloat("MenuSound");

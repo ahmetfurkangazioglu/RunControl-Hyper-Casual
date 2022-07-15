@@ -8,14 +8,15 @@ using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
+    [Header("Other Operation")]
     public Slider[] slider;
     public Button[] ArrowBut;
-    public TextMeshProUGUI LanguageText;
     public AudioSource ButtonSounds;
-    MemoryManager memory = new MemoryManager();
-    [Header("LanguageSettings")]
+    [Header("language Operation")]
+    public TextMeshProUGUI LanguageText;
     public TextMeshProUGUI[] AllText;
-    public List<LanguageSet> languageMainData = new List<LanguageSet>();
+    MemoryManager memory = new MemoryManager();
+    List<LanguageSet> languageMainData = new List<LanguageSet>();
     List<LanguageSet> languageText = new List<LanguageSet>();
     DataManager dataManager = new DataManager();
     void Start()
@@ -54,7 +55,7 @@ public class SettingsManager : MonoBehaviour
         slider[2].value = memory.Get_Float("GameSound");
         ButtonSounds.volume = memory.Get_Float("FxSound");
     }
-    private void SetLanguage(string Value)
+    void SetLanguage(string Value)
     {
         if (Value == "TR")
         {
@@ -71,7 +72,7 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-    public void ChangeLanguage(string Value)
+    void ChangeLanguage(string Value)
     {
         ButtonSounds.Play();
         if (Value=="Next")

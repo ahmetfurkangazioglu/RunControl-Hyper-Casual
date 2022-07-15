@@ -5,16 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyNpc : MonoBehaviour
 {
-    private NavMeshAgent navMeshAgent;
+    bool isStartFight;
+    NavMeshAgent navMeshAgent;
+    Animator Anim;
     public GameObject Target;
-    private Animator Anim;
-    private bool isStartFight;
     void Start()
     {
         Anim = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
-
     void LateUpdate()
     {
         if(isStartFight)
@@ -25,7 +24,6 @@ public class EnemyNpc : MonoBehaviour
         Anim.SetBool("Fight", true);
         isStartFight = true;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Npc"))

@@ -10,27 +10,31 @@ using TMPro;
 public class LevelManager : MonoBehaviour
 {
     int CurrentLevel;
-    MemoryManager memory = new MemoryManager();
+    [Header("Main Operation")]
     public Button[] Buttons;
     public Sprite LockSprite;
     public int LevelIndex =4;
     public AudioSource ButtonSound;
-    [Header("LanguageSettings")]
+    [Header("Loading Operation")]
+    public GameObject loadingPanel;
+    public Slider LoadingSlider;
+    [Header("Language Operation")]
     public TextMeshProUGUI[] AllText;
-    public List<LanguageSet> languageMainData = new List<LanguageSet>();
-    List<LanguageSet> languageText = new List<LanguageSet>();
+
     DataManager dataManager = new DataManager();
+    MemoryManager memory = new MemoryManager();
+    List<LanguageSet> languageMainData = new List<LanguageSet>();
+    List<LanguageSet> languageText = new List<LanguageSet>();
     void Start()
     {
-        ButtonSound.volume = memory.Get_Float("FxSound");
-        languageMainData = dataManager.LoadLanguageList();
-        languageText.Add(languageMainData[3]);
+        StartOperation();
         SetLanguage(memory.Get_String("Language"));
         SetLevel();
     } 
     public void LoadScene(int index)
     {
         ButtonSound.Play();
+        StartCoroutine(LoadingAsync(index));
         SceneManager.LoadScene(index);
     }
     void SetLevel()
@@ -53,7 +57,7 @@ public class LevelManager : MonoBehaviour
             index++;
         }
     }
-    private void SetLanguage(string Value)
+    void SetLanguage(string Value)
     {
         if (Value == "TR")
         {
@@ -70,5 +74,21 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
+    void StartOperation()
+    {
+        ButtonSound.volume = memory.Get_Float("FxSound");
+        languageMainData = dataManager.LoadLanguageList();
+        languageText.Add(languageMainData[3]);
+    }
+    IEnumerator LoadingAsync(int Index)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(Index);
+        loadingPanel.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadingSlider.value = progress;
+            yield return null;
+        }
+    }
 }

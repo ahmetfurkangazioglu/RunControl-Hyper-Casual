@@ -21,20 +21,14 @@ public class CustomizeManager : MonoBehaviour
     Material[] material;
     [Header("---------------Hat Operation")]
     public GameObject[] Hatitems;
-
     [Header("---------------Weapon Operation")]
     public GameObject[] Weaponitems;
-
-   [Header("---------------Ninja Material Operation")]
+    [Header("---------------Ninja Material Operation")]
     public Material DefaultMat;
     public SkinnedMeshRenderer _meshRender;
     public Material[] NinjaMat;
-
     [Header("---------------language Operation")]
     public TextMeshProUGUI[] AllText;
-    public List<LanguageSet> languageMainData = new List<LanguageSet>();
-    List<LanguageSet> languageText = new List<LanguageSet>();
-
     [Header("---------------General Operation")]
     public Animator anim;
     public Text PointText;
@@ -43,10 +37,12 @@ public class CustomizeManager : MonoBehaviour
     public Button[] buttons;
     public GameObject[] GeneralPanel;
     public AudioSource[] GeneralSounds;
-     List<ItemInfo> _ItemInfo = new List<ItemInfo>();
 
+    List<ItemInfo> _ItemInfo = new List<ItemInfo>();
     MemoryManager memory = new MemoryManager();
     DataManager dataManager = new DataManager();
+    List<LanguageSet> languageMainData = new List<LanguageSet>();
+    List<LanguageSet> languageText = new List<LanguageSet>();
     void Start()
     {
         DataAndStartOperation();
@@ -191,7 +187,7 @@ public class CustomizeManager : MonoBehaviour
         GeneralSounds[0].Play();
         SceneManager.LoadScene(0);
     }
-    private void ChooseOperation(string Operation)
+    void ChooseOperation(string Operation)
     {
         switch (Operation)
         {
@@ -229,7 +225,7 @@ public class CustomizeManager : MonoBehaviour
         else
             itemNames.text = _ItemInfo[Currentindex + Added›ndex].ItemName;
     }
-    private void SetItem(bool IsMat, GameObject[] items, Material[] mat,int Index)
+    void SetItem(bool IsMat, GameObject[] items, Material[] mat,int Index)
     {
             if (!IsMat)
             {
@@ -257,7 +253,7 @@ public class CustomizeManager : MonoBehaviour
                 }                 
             }
     }
-    private int CurrentItenIndex(string Value)
+    int CurrentItenIndex(string Value)
     {
         switch (Value)
         {
@@ -271,7 +267,7 @@ public class CustomizeManager : MonoBehaviour
                 return -1;              
         }
     }
-    private void buttonCheck(int length)
+    void buttonCheck(int length)
     {
         if (Currentindex == -1)
         {
@@ -283,7 +279,7 @@ public class CustomizeManager : MonoBehaviour
         }
           
     }
-    private void BuyAndSaveButManager()
+    void BuyAndSaveButManager()
     {
         if (Currentindex != -1)
         {
@@ -311,7 +307,7 @@ public class CustomizeManager : MonoBehaviour
             SaveSitatu();
         }
     }
-    private void SaveSitatu()
+    void SaveSitatu()
     {
         BuyAndSaveButtom[0].interactable = false;
         if (SavedItem == Currentindex)
@@ -319,7 +315,7 @@ public class CustomizeManager : MonoBehaviour
         else
             BuyAndSaveButtom[1].interactable = true;
     }
-    private void SetLanguage(string Value)
+    void SetLanguage(string Value)
     {
         if (Value == "TR")
         {
@@ -342,7 +338,7 @@ public class CustomizeManager : MonoBehaviour
             Purchased = languageText[0].Language_EN[7].Text;
         }
     }
-    private void DataAndStartOperation()
+    void DataAndStartOperation()
     {
         Point = memory.Get_int("TotalPoint");
         PointText.text = Point.ToString();

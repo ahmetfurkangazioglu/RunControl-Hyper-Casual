@@ -4,21 +4,19 @@ using UnityEngine;
 using UnityEngine.AI;
 public class NpcCharacter : MonoBehaviour
 {
-    private NavMeshAgent _navMesh;
-    public GameObject Target;
+    NavMeshAgent _navMesh;
     MainControl mainControl;
+    public GameObject Target;
     void Start()
     {
         _navMesh = gameObject.GetComponent<NavMeshAgent>();
         mainControl = GameObject.FindWithTag("MainControl").GetComponent<MainControl>();
     }
-
     void LateUpdate()
     {
         _navMesh.SetDestination(Target.transform.position);
     }
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("NeedleBox"))
         {

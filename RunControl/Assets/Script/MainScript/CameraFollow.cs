@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 Target_Offset;
     public bool isStartFightCam;
     public GameObject NewPos;
-    private void Start()
+    void Start()
     {
         Target_Offset = transform.position - Target.position;
     }

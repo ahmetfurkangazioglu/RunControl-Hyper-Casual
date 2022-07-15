@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-    public MainControl mainControl;
-    public Camera MyCam;
-     bool isStartFight;
+    bool isStartFight;
+    [Header("General Operation")]
     public GameObject MidArea;
     public Slider slider;
     public GameObject TargetDsitance;
-    private void FixedUpdate()
+    [Header("Cam Operation")]
+    public MainControl mainControl;
+    public Camera MyCam;
+    void FixedUpdate()
     {
         if(!isStartFight)
         transform.Translate(Vector3.forward * .5f * Time.deltaTime);
     }
-     void Start()
+    void Start()
     {
         slider.maxValue = Vector3.Distance(transform.position, TargetDsitance.transform.position);
     }
@@ -46,7 +48,6 @@ public class Character : MonoBehaviour
         }
      }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Divided")|| other.CompareTag("Multiply")|| other.CompareTag("Minus")|| other.CompareTag("Plus"))
@@ -60,7 +61,6 @@ public class Character : MonoBehaviour
             isStartFight = true;
         }
     }
-
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Column")|| collision.gameObject.CompareTag("NeedleBox"))

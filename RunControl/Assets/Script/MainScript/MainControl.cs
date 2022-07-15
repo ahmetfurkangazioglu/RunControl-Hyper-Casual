@@ -10,34 +10,37 @@ using TMPro;
 public class MainControl : MonoBehaviour
 {
     Scene scene;
+    bool GameResult=true;
+    [Header("General Operation")]
+    public Slider LoadingSlider;
     public GameObject Target;
+    public bool isStartFight;
+    public GameObject[] GeneralPanel;
+    [Header("Npc Operation")]
     public List<GameObject> NpcPooling;
     public static int NpcAmount;
-    public bool isStartFight;
-    public AudioSource[] GeneralSound;
-    public GameObject[] GeneralPanel;
-    public Slider SoundSlider;
-    MemoryManager memoryManager = new MemoryManager();
-
-    [Header("EffectsSettings")]
+    [Header("Effects Operation")]
     public List<GameObject> DeadEffectPooling;
     public List<GameObject> CreatEffectPooling;
     public List<GameObject> BodyStainPooling;
-
-    [Header("EnemySettings")]
+    [Header("Enemy Operation")]
     public List<GameObject> EnemyPooling;
-    public int HowManyhEnemies;
-
-    [Header("Hat Operation")]
+    public int HowManyEnemies;
+    [Header("Items Operation")]
     public GameObject[] Hatitems;
     public GameObject[] Weaponitems;
     public SkinnedMeshRenderer _meshRender;
     public Material[] NinjaMat;
-    [Header("LanguageSettings")]
+    [Header("Sound Operation")]
+    public AudioSource[] GeneralSound;
+    public Slider SoundSlider;
+    [Header("Language Operation")]
     public TextMeshProUGUI[] AllText;
-    public List<LanguageSet> languageMainData = new List<LanguageSet>();
-    List<LanguageSet> languageText = new List<LanguageSet>();
+
     DataManager dataManager = new DataManager();
+    MemoryManager memoryManager = new MemoryManager();
+    List<LanguageSet> languageMainData = new List<LanguageSet>();
+    List<LanguageSet> languageText = new List<LanguageSet>();
     void Start()
     {
         scene = SceneManager.GetActiveScene();
@@ -77,13 +80,6 @@ public class MainControl : MonoBehaviour
 
 
     }
-    private void CreateEnemy()
-    {
-        for (int i = 0; i < HowManyhEnemies; i++)
-        {
-            EnemyPooling[i].SetActive(true);                                         
-        }
-    }
     public void StartFinalFight()
     {
         FightResult();
@@ -95,46 +91,6 @@ public class MainControl : MonoBehaviour
            item.GetComponent<EnemyNpc>().AnimationTrriger();
          }          
         }
-    }
-    private void FightResult()
-    {
-        if (NpcAmount==1 || HowManyhEnemies==0)
-        {
-            if (HowManyhEnemies == 0)
-            {
-                Debug.Log("Win");
-                //win
-            }
-            else if (NpcAmount==1 && HowManyhEnemies>=1)
-            {
-                Debug.Log("Lose");                
-                //lose
-            }
-        }
-    }
-    private void FinalFightControl(bool isDeadNpc)
-    {
-        if (isDeadNpc)
-            NpcAmount--;
-        else
-            HowManyhEnemies--;
-
-        if (isStartFight)
-            FightResult();
-    }
-    private void SetItem()
-    {
-        if (memoryManager.Get_int("MaterialIndex") != -1)
-        {
-            Material[] mats = _meshRender.materials;
-            mats[0] = NinjaMat[memoryManager.Get_int("MaterialIndex")];
-            _meshRender.material = mats[0];
-        }
-        if (memoryManager.Get_int("HatIndex") != -1)
-            Hatitems[(memoryManager.Get_int("HatIndex"))].SetActive(true);
-        if (memoryManager.Get_int("WeaponIndex") != -1)
-            Weaponitems[(memoryManager.Get_int("WeaponIndex"))].SetActive(true);
-
     }
     public void SoundSettings(string Settings)
     {
@@ -179,7 +135,72 @@ public class MainControl : MonoBehaviour
                 break;
         }
     }
-    private void SetLanguage(string Value)
+    public void NextLevel()
+    {
+        GeneralSound[0].Play();
+        StartCoroutine(LoadingAsync(scene.buildIndex + 1));
+    }
+    void FightResult()
+    {
+        if (GameResult && (NpcAmount == 1 || HowManyEnemies == 0))
+        {
+            if (HowManyEnemies == 0)
+            {
+                GameResult = false;
+                if (scene.buildIndex==memoryManager.Get_int("CurrentLevel"))
+                {
+                    int point = NpcAmount * 15;
+                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + point);
+                    memoryManager.Save_int("CurrentLevel", scene.buildIndex + 1);
+                }
+                else
+                {
+                    int point = NpcAmount * 5;
+                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + point);
+                }      
+                GeneralPanel[3].SetActive(true);
+                //win
+            }
+            else if (NpcAmount == 1 && HowManyEnemies >= 1)
+            {
+                GameResult = false;
+                GeneralPanel[2].SetActive(true);
+                //lose
+            }
+        }
+    }
+    void FinalFightControl(bool isDeadNpc)
+    {
+        if (isDeadNpc)
+            NpcAmount--;
+        else
+            HowManyEnemies--;
+
+        if (isStartFight)
+            FightResult();
+    }
+    void CreateEnemy()
+    {
+        for (int i = 0; i < HowManyEnemies; i++)
+        {
+            EnemyPooling[i].SetActive(true);
+        }
+    }
+    void SetItem()
+    {
+        if (memoryManager.Get_int("MaterialIndex") != -1)
+        {
+            Material[] mats = _meshRender.materials;
+            mats[0] = NinjaMat[memoryManager.Get_int("MaterialIndex")];
+            _meshRender.material = mats[0];
+        }
+        if (memoryManager.Get_int("HatIndex") != -1)
+            Hatitems[(memoryManager.Get_int("HatIndex"))].SetActive(true);
+        if (memoryManager.Get_int("WeaponIndex") != -1)
+            Weaponitems[(memoryManager.Get_int("WeaponIndex"))].SetActive(true);
+
+    }
+    void SetLanguage(string Value)
     {
         if (Value == "TR")
         {
@@ -207,5 +228,16 @@ public class MainControl : MonoBehaviour
         languageMainData = dataManager.LoadLanguageList();
         languageText.Add(languageMainData[1]);
         SetLanguage(memoryManager.Get_String("Language"));
+    }
+    IEnumerator LoadingAsync(int Index)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(Index);
+        GeneralPanel[4].SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadingSlider.value = progress;
+            yield return null;
+        }
     }
 }

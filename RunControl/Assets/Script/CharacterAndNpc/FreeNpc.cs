@@ -5,26 +5,25 @@ using UnityEngine.AI;
 
 public class FreeNpc : MonoBehaviour
 {
-    public SkinnedMeshRenderer _meshRender;
-    public MainControl mainControl;
-    public Material NewMatarial;
-    public GameObject Target;
-    NavMeshAgent _meshAgent;
-    public Animator anim;
     bool Collected;
+    [Header("General Operation")]
+    public MainControl mainControl;
+    public GameObject Target;
+    public Animator anim;
+    [Header("Material Operation")]
+    public SkinnedMeshRenderer _meshRender;
+    public Material NewMatarial;
 
+    NavMeshAgent _meshAgent;
     void Start()
     {
         _meshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
-
-
     void LateUpdate()
     {
         if(Collected)
         _meshAgent.SetDestination(Target.transform.position);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Npc")||other.CompareTag("Player"))
@@ -48,7 +47,7 @@ public class FreeNpc : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    private void FreeNpcSettings() {
+    void FreeNpcSettings() {
         Material[] mats = _meshRender.materials;
         mats[0] = NewMatarial;
         _meshRender.material = mats[0];
