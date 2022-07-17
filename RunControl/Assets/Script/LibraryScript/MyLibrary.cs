@@ -192,6 +192,7 @@ namespace MyLibrary
                 Save_float("MenuSound", .6f);
                 Save_float("FxSound", .6f);
                 Save_string("Language", "EN");
+                Save_int("CurrentAd", 0);
             }
         }
     }

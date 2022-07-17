@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MyLibrary;
+using AdManager;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -12,6 +13,7 @@ public class MainControl : MonoBehaviour
     Scene scene;
     bool GameResult=true;
     [Header("General Operation")]
+    public static int LevelPoint;
     public Slider LoadingSlider;
     public GameObject Target;
     public bool isStartFight;
@@ -41,10 +43,13 @@ public class MainControl : MonoBehaviour
     MemoryManager memoryManager = new MemoryManager();
     List<LanguageSet> languageMainData = new List<LanguageSet>();
     List<LanguageSet> languageText = new List<LanguageSet>();
+    AdMobManager adMobManager = new AdMobManager();
     void Start()
     {
         scene = SceneManager.GetActiveScene();
         NpcAmount = 1;
+        adMobManager.RequestInterstitialAd();
+        adMobManager.RequestRewardAd();
         Destroy(GameObject.FindWithTag("SoundManager"));
         LanguageManager();
         SetItem();
@@ -140,23 +145,27 @@ public class MainControl : MonoBehaviour
         GeneralSound[0].Play();
         StartCoroutine(LoadingAsync(scene.buildIndex + 1));
     }
+    public void RewardedOperation()
+    {
+        adMobManager.ShowReward();
+    }
     void FightResult()
     {
         if (GameResult && (NpcAmount == 1 || HowManyEnemies == 0))
-        {
+        { 
             if (HowManyEnemies == 0)
             {
                 GameResult = false;
                 if (scene.buildIndex==memoryManager.Get_int("CurrentLevel"))
                 {
-                    int point = NpcAmount * 15;
-                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + point);
+                     LevelPoint = NpcAmount * 15;
+                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + LevelPoint);
                     memoryManager.Save_int("CurrentLevel", scene.buildIndex + 1);
                 }
                 else
                 {
-                    int point = NpcAmount * 5;
-                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + point);
+                    LevelPoint = 15;
+                    memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + LevelPoint);
                 }      
                 GeneralPanel[3].SetActive(true);
                 //win
@@ -167,6 +176,7 @@ public class MainControl : MonoBehaviour
                 GeneralPanel[2].SetActive(true);
                 //lose
             }
+            adMobManager.ShowInterstitial();
         }
     }
     void FinalFightControl(bool isDeadNpc)
