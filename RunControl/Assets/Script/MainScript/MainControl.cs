@@ -13,6 +13,7 @@ public class MainControl : MonoBehaviour
     Scene scene;
     bool GameResult=true;
     [Header("General Operation")]
+    public Button[] RewardButton;
     public static int LevelPoint;
     public Slider LoadingSlider;
     public GameObject Target;
@@ -149,6 +150,11 @@ public class MainControl : MonoBehaviour
     {
         adMobManager.ShowReward();
     }
+    public  void DisableReward()
+    {
+        RewardButton[0].interactable = false;
+        RewardButton[1].interactable = false;
+    }
     void FightResult()
     {
         if (GameResult && (NpcAmount == 1 || HowManyEnemies == 0))
@@ -250,4 +256,5 @@ public class MainControl : MonoBehaviour
             yield return null;
         }
     }
+
 }

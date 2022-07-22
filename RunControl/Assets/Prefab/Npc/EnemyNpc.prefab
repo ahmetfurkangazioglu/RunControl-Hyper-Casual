@@ -162,9 +162,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8046221956388743622}
+  - component: {fileID: 4161935946855340446}
   m_Layer: 0
   m_Name: RightLeg
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +185,20 @@ Transform:
   m_Father: {fileID: 3144994012886662969}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4161935946855340446
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614727125390470392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.06661949
+  m_Height: 0.32962215
+  m_Direction: 1
+  m_Center: {x: 0.0030430604, y: 0.13672094, z: -0.0014164894}
 --- !u!1 &2000407824078516286
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,9 +208,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1243852662070443490}
+  - component: {fileID: 1588569654840828523}
   m_Layer: 0
   m_Name: RightHand
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +232,20 @@ Transform:
   m_Father: {fileID: 6670310304956207687}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1588569654840828523
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000407824078516286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.09782202
+  m_Height: 0.22509943
+  m_Direction: 1
+  m_Center: {x: -0.0049069934, y: 0.10013857, z: 0.026787119}
 --- !u!1 &2020827322296923525
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,9 +255,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690198445634164617}
+  - component: {fileID: 8130556423794741611}
   m_Layer: 0
   m_Name: Hips
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,6 +280,20 @@ Transform:
   m_Father: {fileID: 7882639861122510955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8130556423794741611
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020827322296923525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.30349553
+  m_Height: 1.0930182
+  m_Direction: 1
+  m_Center: {x: -0.0044441596, y: 0.31277055, z: -0.003285408}
 --- !u!1 &2157571756284291654
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,9 +303,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2976892116273583922}
+  - component: {fileID: 4323132846020743542}
   m_Layer: 0
   m_Name: LeftLeg
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,6 +326,20 @@ Transform:
   m_Father: {fileID: 6059729942543403027}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4323132846020743542
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157571756284291654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.061708707
+  m_Height: 0.2795025
+  m_Direction: 1
+  m_Center: {x: -0.0012525528, y: 0.19469064, z: 0.010927831}
 --- !u!1 &2241565028210872727
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,9 +379,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6059729942543403027}
+  - component: {fileID: 4634027523065789696}
   m_Layer: 0
   m_Name: LeftUpLeg
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,6 +402,20 @@ Transform:
   m_Father: {fileID: 690198445634164617}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4634027523065789696
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277926123331111574}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.08258522
+  m_Height: 0.45896828
+  m_Direction: 1
+  m_Center: {x: -0.004335629, y: 0.25096813, z: 0.012363087}
 --- !u!1 &2484644635776469563
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,9 +486,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6619328629973720487}
+  - component: {fileID: 8197909789994406322}
   m_Layer: 0
   m_Name: LeftForeArm
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -433,6 +509,20 @@ Transform:
   m_Father: {fileID: 610647858860035145}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8197909789994406322
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250949143618772259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.057082184
+  m_Height: 0.30051455
+  m_Direction: 1
+  m_Center: {x: -0.00974792, y: 0.13657151, z: 0.0025530553}
 --- !u!1 &3288719057629627559
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,9 +563,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3144994012886662969}
+  - component: {fileID: 8285260906975084461}
   m_Layer: 0
   m_Name: RightUpLeg
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -495,6 +586,20 @@ Transform:
   m_Father: {fileID: 690198445634164617}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8285260906975084461
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453963054273636711}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.07849499
+  m_Height: 0.42548683
+  m_Direction: 1
+  m_Center: {x: 0.017886883, y: 0.25326896, z: 0.016688121}
 --- !u!1 &3868017947232385443
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +612,6 @@ GameObject:
   - component: {fileID: 6112500954130128419}
   - component: {fileID: 4008115524562933925}
   - component: {fileID: 2840663298062699120}
-  - component: {fileID: 6714777238180551970}
   - component: {fileID: 2539463722378159949}
   m_Layer: 0
   m_Name: EnemyNpc
@@ -576,11 +680,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 3868017947232385443}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 100
+  m_Radius: 0.6
+  m_Speed: 3
+  m_Acceleration: 500
   avoidancePriority: 50
-  m_AngularSpeed: 450
+  m_AngularSpeed: 180
   m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -589,19 +693,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &6714777238180551970
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3868017947232385443}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.190749, y: 2.7840428, z: 0.99041706}
-  m_Center: {x: -0.07369138, y: 1.5282192, z: -0.044268817}
 --- !u!114 &2539463722378159949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,9 +746,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189517042584056288}
+  - component: {fileID: 2363652137817060941}
   m_Layer: 0
   m_Name: LeftHand
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -678,6 +770,20 @@ Transform:
   m_Father: {fileID: 6619328629973720487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2363652137817060941
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4178529146416362695}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.090325505
+  m_Height: 0.23311487
+  m_Direction: 1
+  m_Center: {x: -0.0017668209, y: 0.08006922, z: 0.013467191}
 --- !u!1 &4416494386583198190
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,9 +1043,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566538491071562703}
+  - component: {fileID: 8190480079781324019}
   m_Layer: 0
   m_Name: RightToeBase
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,6 +1066,20 @@ Transform:
   m_Father: {fileID: 4236803903231150581}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8190480079781324019
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038153906895222050}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.074526
+  m_Height: 0.24319422
+  m_Direction: 1
+  m_Center: {x: -0.004746947, y: -0.049757347, z: 0.04407261}
 --- !u!1 &5455088470663542590
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,9 +1119,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6086448476696076161}
+  - component: {fileID: 1832383403452498159}
   m_Layer: 0
   m_Name: LeftToeBase
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,6 +1142,20 @@ Transform:
   m_Father: {fileID: 7726465011300580591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1832383403452498159
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047611140626516556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.07410257
+  m_Height: 0.24341469
+  m_Direction: 1
+  m_Center: {x: -0.00000014424108, y: -0.05478454, z: 0.041531738}
 --- !u!1 &6372748563618214568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,9 +1196,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5688578331786698642}
+  - component: {fileID: 5233753236639847345}
   m_Layer: 0
   m_Name: HeadTop_End
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1081,6 +1218,20 @@ Transform:
   m_Father: {fileID: 886162103248559194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5233753236639847345
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435750593698869708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5581331
+  m_Height: 1.3168471
+  m_Direction: 1
+  m_Center: {x: 2.85785e-13, y: -0.62619233, z: -0.035738945}
 --- !u!1 &6583999732687468170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,9 +1388,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6670310304956207687}
+  - component: {fileID: 3339158855677245609}
   m_Layer: 0
   m_Name: RightForeArm
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1259,6 +1411,20 @@ Transform:
   m_Father: {fileID: 5011255142668974373}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3339158855677245609
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844662604379709121}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.050343066
+  m_Height: 0.335939
+  m_Direction: 1
+  m_Center: {x: 0.009299055, y: 0.19536194, z: -0.0020742107}
 --- !u!1 &7409783694641841371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,9 +1527,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5011255142668974373}
+  - component: {fileID: 357595231695876090}
   m_Layer: 0
   m_Name: RightArm
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1383,6 +1550,20 @@ Transform:
   m_Father: {fileID: 4448579845401379366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &357595231695876090
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217289464503920801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.081204735
+  m_Height: 0.5434486
+  m_Direction: 1
+  m_Center: {x: -0.0048609865, y: 0.17598554, z: 0.004566055}
 --- !u!1 &8303255855876126869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,9 +1573,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610647858860035145}
+  - component: {fileID: 7455788385852824656}
   m_Layer: 0
   m_Name: LeftArm
-  m_TagString: Untagged
+  m_TagString: EnemyNpc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1414,6 +1596,20 @@ Transform:
   m_Father: {fileID: 1826539215481453202}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7455788385852824656
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303255855876126869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.072814964
+  m_Height: 0.55035436
+  m_Direction: 1
+  m_Center: {x: -0.0018534506, y: 0.17411663, z: -0.0052971374}
 --- !u!1 &8692518201372909984
 GameObject:
   m_ObjectHideFlags: 0

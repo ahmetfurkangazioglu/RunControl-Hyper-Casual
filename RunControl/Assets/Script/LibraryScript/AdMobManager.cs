@@ -80,6 +80,11 @@ namespace AdManager
             if (rewarded.IsLoaded())
             {
                 rewarded.Show();
+                GameObject.FindWithTag("MainControl").GetComponent<MainControl>().DisableReward();
+            }
+            else
+            {
+                GameObject.FindWithTag("MainControl").GetComponent<MainControl>().DisableReward();
             }                     
         }
         private void UserEarnedReward(object sender, Reward e)

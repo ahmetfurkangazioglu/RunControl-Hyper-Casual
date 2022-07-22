@@ -9,7 +9,10 @@ public class Wild : MonoBehaviour
     {
         if (other.CompareTag("Npc"))
         {
-            other.GetComponent<Rigidbody>().AddForce(new Vector3(FanPower, 0, 0), ForceMode.Impulse);
+            if (other.GetComponent<Rigidbody>()!=null)
+            {
+                other.GetComponent<Rigidbody>().AddForce(new Vector3(FanPower, 0, 0), ForceMode.Impulse);
+            }        
         }  
     }
 }

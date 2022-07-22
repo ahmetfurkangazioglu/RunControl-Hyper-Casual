@@ -13,6 +13,7 @@ public class FreeNpc : MonoBehaviour
     [Header("Material Operation")]
     public SkinnedMeshRenderer _meshRender;
     public Material NewMatarial;
+    public GameObject[] ChamgeTag;
 
     NavMeshAgent _meshAgent;
     void Start()
@@ -54,8 +55,12 @@ public class FreeNpc : MonoBehaviour
         Collected = true;
         gameObject.GetComponent<AudioSource>().Play();
         anim.SetBool("Run", true);
-        gameObject.tag = "Npc";
+        foreach (var item in ChamgeTag)
+        {
+            item.tag = "Npc";
+        }
         mainControl.NpcPooling.Add(gameObject);
-        MainControl.NpcAmount++;
+        MainControl.NpcAmount++;     
     }
+
 }
