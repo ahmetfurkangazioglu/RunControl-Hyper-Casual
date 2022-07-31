@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     private static GameObject instantiate;
-    public AudioSource MainSound;
+    [SerializeField] AudioSource MainSound;
     void Start()
     {
         MainSound.Play();

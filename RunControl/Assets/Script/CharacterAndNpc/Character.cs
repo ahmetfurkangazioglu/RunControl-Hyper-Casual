@@ -9,12 +9,12 @@ public class Character : MonoBehaviour
     bool IsCollider = true;
     bool isStartFight;
     [Header("General Operation")]
-    public float SwipeSpeed;
-    public GameObject MidArea;
-    public Slider slider;
-    public GameObject TargetDsitance;
+    [SerializeField]  float SwipeSpeed;
+    [SerializeField] GameObject MidArea;
+    [SerializeField] Slider slider;
+    [SerializeField] GameObject TargetDsitance;
     [Header("Cam Operation")]
-    public MainControl mainControl;
+    [SerializeField] MainControl mainControl;
     void FixedUpdate()
     {
         if(!isStartFight)

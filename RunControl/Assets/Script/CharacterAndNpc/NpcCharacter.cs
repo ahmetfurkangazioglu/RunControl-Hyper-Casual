@@ -6,7 +6,7 @@ public class NpcCharacter : MonoBehaviour
 {
     NavMeshAgent _navMesh;
     MainControl mainControl;
-    public GameObject Target;
+    [SerializeField] GameObject Target;
     void Start()
     {
         _navMesh = gameObject.GetComponent<NavMeshAgent>();

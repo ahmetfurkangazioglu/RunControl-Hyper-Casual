@@ -11,15 +11,17 @@ public class LevelManager : MonoBehaviour
 {
     int CurrentLevel;
     [Header("Main Operation")]
-    public Button[] Buttons;
-    public Sprite LockSprite;
-    public int LevelIndex =4;
-    public AudioSource ButtonSound;
+    [SerializeField] Button[] Buttons;
+    [SerializeField] Sprite LockSprite;
+    [SerializeField] int LevelIndex =4;
+    [SerializeField] AudioSource ButtonSound;
+
     [Header("Loading Operation")]
-    public GameObject loadingPanel;
-    public Slider LoadingSlider;
+    [SerializeField] GameObject loadingPanel;
+    [SerializeField] Slider LoadingSlider;
+
     [Header("Language Operation")]
-    public TextMeshProUGUI[] AllText;
+    [SerializeField] TextMeshProUGUI[] AllText;
 
     DataManager dataManager = new DataManager();
     MemoryManager memory = new MemoryManager();

@@ -15,7 +15,7 @@ public class ShopManager : MonoBehaviour,IStoreListener
     private static string Point_750 = "";
     private static string Point_1000 = "";
     [Header("Language Operation")]
-    public TextMeshProUGUI[] AllText;
+    [SerializeField] TextMeshProUGUI[] AllText;
 
     DataManager dataManager = new DataManager();
     MemoryManager memory = new MemoryManager();

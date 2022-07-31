@@ -8,7 +8,7 @@ public class EnemyNpc : MonoBehaviour
     bool isStartFight;
     NavMeshAgent navMeshAgent;
     Animator Anim;
-    public GameObject Target;
+    [SerializeField] GameObject Target;
     void Start()
     {
         Anim = GetComponent<Animator>();

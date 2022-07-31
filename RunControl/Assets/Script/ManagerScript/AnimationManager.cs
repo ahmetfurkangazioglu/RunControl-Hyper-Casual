@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
-    public Animator anim;
+    [SerializeField] Animator anim;
     public void DisableAnim()
     {
         anim.SetBool("Play", false);

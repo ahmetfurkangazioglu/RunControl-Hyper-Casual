@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Fan : MonoBehaviour
 {
-    public Animator Anim;
-    public int FanTime;
-    public BoxCollider boxCollider;
+    [SerializeField] Animator Anim;
+    [SerializeField] int FanTime;
+    [SerializeField] BoxCollider boxCollider;
     public void StopFan()
     {
        Anim.SetBool("Fan", false);

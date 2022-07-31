@@ -19,24 +19,29 @@ public class CustomizeManager : MonoBehaviour
     int SavedItem;
     GameObject[] items;
     Material[] material;
+
     [Header("---------------Hat Operation")]
-    public GameObject[] Hatitems;
+    [SerializeField] GameObject[] Hatitems;
+
     [Header("---------------Weapon Operation")]
-    public GameObject[] Weaponitems;
+    [SerializeField] GameObject[] Weaponitems;
+
     [Header("---------------Ninja Material Operation")]
-    public Material DefaultMat;
-    public SkinnedMeshRenderer _meshRender;
-    public Material[] NinjaMat;
+    [SerializeField] Material DefaultMat;
+    [SerializeField] SkinnedMeshRenderer _meshRender;
+    [SerializeField] Material[] NinjaMat;
+
     [Header("---------------language Operation")]
-    public TextMeshProUGUI[] AllText;
+    [SerializeField] TextMeshProUGUI[] AllText;
+
     [Header("---------------General Operation")]
-    public Animator anim;
-    public Text PointText;
-    public Text itemNames;
-    public Button[] BuyAndSaveButtom;
-    public Button[] buttons;
-    public GameObject[] GeneralPanel;
-    public AudioSource[] GeneralSounds;
+    [SerializeField] Animator anim;
+    [SerializeField] Text PointText;
+    [SerializeField] Text itemNames;
+    [SerializeField] Button[] BuyAndSaveButtom;
+    [SerializeField] Button[] buttons;
+    [SerializeField] GameObject[] GeneralPanel;
+    [SerializeField] AudioSource[] GeneralSounds;
 
     List<ItemInfo> _ItemInfo = new List<ItemInfo>();
     MemoryManager memory = new MemoryManager();

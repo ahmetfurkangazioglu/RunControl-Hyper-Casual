@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wild : MonoBehaviour
 {
-    public int FanPower;
+    [SerializeField] int FanPower;
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Npc"))

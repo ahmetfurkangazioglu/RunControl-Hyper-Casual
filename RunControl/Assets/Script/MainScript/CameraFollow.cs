@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform Target;
-    public Vector3 Target_Offset;
     public bool isStartFightCam;
-    public GameObject NewPos;
+    [SerializeField] Transform Target;
+    [SerializeField] Vector3 Target_Offset;    
+    [SerializeField] GameObject NewPos;
     void Start()
     {
         Target_Offset = transform.position - Target.position;

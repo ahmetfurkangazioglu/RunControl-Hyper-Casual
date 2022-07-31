@@ -7,13 +7,13 @@ public class FreeNpc : MonoBehaviour
 {
     bool Collected;
     [Header("General Operation")]
-    public MainControl mainControl;
-    public GameObject Target;
-    public Animator anim;
+    [SerializeField] MainControl mainControl;
+    [SerializeField] GameObject Target;
+    [SerializeField] Animator anim;
     [Header("Material Operation")]
-    public SkinnedMeshRenderer _meshRender;
-    public Material NewMatarial;
-    public GameObject[] ChamgeTag;
+    [SerializeField] SkinnedMeshRenderer _meshRender;
+    [SerializeField] Material NewMatarial;
+    [SerializeField] GameObject[] ChamgeTag;
 
     NavMeshAgent _meshAgent;
     void Start()

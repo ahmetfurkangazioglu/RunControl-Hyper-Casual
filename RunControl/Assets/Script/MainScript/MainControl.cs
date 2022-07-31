@@ -12,33 +12,39 @@ public class MainControl : MonoBehaviour
 {
     Scene scene;
     bool GameResult=true;
+
     [Header("General Operation")]
-    public Button[] RewardButton;
+    [SerializeField] Button[] RewardButton;
+    [SerializeField] Slider LoadingSlider;
+    [SerializeField] GameObject[] GeneralPanel;
     public static int LevelPoint;
-    public Slider LoadingSlider;
-    public GameObject Target;
-    public bool isStartFight;
-    public GameObject[] GeneralPanel;
+    [HideInInspector] public bool isStartFight;
+
     [Header("Npc Operation")]
     public List<GameObject> NpcPooling;
     public static int NpcAmount;
+
     [Header("Effects Operation")]
-    public List<GameObject> DeadEffectPooling;
-    public List<GameObject> CreatEffectPooling;
-    public List<GameObject> BodyStainPooling;
+    [SerializeField] List<GameObject> DeadEffectPooling;
+    [SerializeField] List<GameObject> CreatEffectPooling;
+    [SerializeField] List<GameObject> BodyStainPooling;
+
     [Header("Enemy Operation")]
-    public List<GameObject> EnemyPooling;
-    public int HowManyEnemies;
+    [SerializeField] List<GameObject> EnemyPooling;
+    [SerializeField] int HowManyEnemies;
+
     [Header("Items Operation")]
-    public GameObject[] Hatitems;
-    public GameObject[] Weaponitems;
-    public SkinnedMeshRenderer _meshRender;
-    public Material[] NinjaMat;
+    [SerializeField] GameObject[] Hatitems;
+    [SerializeField] GameObject[] Weaponitems;
+    [SerializeField] SkinnedMeshRenderer _meshRender;
+    [SerializeField] Material[] NinjaMat;
+
     [Header("Sound Operation")]
-    public AudioSource[] GeneralSound;
-    public Slider SoundSlider;
+    [SerializeField] AudioSource[] GeneralSound;
+    [SerializeField] Slider SoundSlider;
+
     [Header("Language Operation")]
-    public TextMeshProUGUI[] AllText;
+    [SerializeField] TextMeshProUGUI[] AllText;
 
     DataManager dataManager = new DataManager();
     MemoryManager memoryManager = new MemoryManager();

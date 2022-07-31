@@ -9,12 +9,12 @@ using TMPro;
 public class SettingsManager : MonoBehaviour
 {
     [Header("Other Operation")]
-    public Slider[] slider;
-    public Button[] ArrowBut;
-    public AudioSource ButtonSounds;
+    [SerializeField] Slider[] slider;
+    [SerializeField] Button[] ArrowBut;
+    [SerializeField] AudioSource ButtonSounds;
     [Header("language Operation")]
-    public TextMeshProUGUI LanguageText;
-    public TextMeshProUGUI[] AllText;
+    [SerializeField] TextMeshProUGUI LanguageText;
+    [SerializeField] TextMeshProUGUI[] AllText;
     MemoryManager memory = new MemoryManager();
     List<LanguageSet> languageMainData = new List<LanguageSet>();
     List<LanguageSet> languageText = new List<LanguageSet>();
@@ -72,7 +72,7 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-    void ChangeLanguage(string Value)
+   public void ChangeLanguage(string Value)
     {
         ButtonSounds.Play();
         if (Value=="Next")

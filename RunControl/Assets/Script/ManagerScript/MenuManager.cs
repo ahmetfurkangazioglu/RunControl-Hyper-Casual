@@ -9,14 +9,16 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [Header("Other Operation")]
-    public GameObject[] GeneralPanel;
-    public AudioSource ButtonSound;
-    public Slider LoadingSlider;
+    [SerializeField] GameObject[] GeneralPanel;
+    [SerializeField] AudioSource ButtonSound;
+    [SerializeField] Slider LoadingSlider;
+
     [Header("ItemData")]
-    public List<ItemInfo> _ItemInfo = new List<ItemInfo>();
+    [SerializeField] List<ItemInfo> _ItemInfo = new List<ItemInfo>();
+
     [Header("LanguageSettings")]
-    public TextMeshProUGUI[] AllText;
-    public List<LanguageSet> languageMainData = new List<LanguageSet>();
+    [SerializeField] TextMeshProUGUI[] AllText;
+    [SerializeField] List<LanguageSet> languageMainData = new List<LanguageSet>();
 
     MemoryManager memoryManager = new MemoryManager();
     DataManager dataManager = new DataManager();
