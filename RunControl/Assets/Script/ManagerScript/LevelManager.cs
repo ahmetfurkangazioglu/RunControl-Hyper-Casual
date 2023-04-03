@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
     List<LanguageSet> languageMainData = new List<LanguageSet>();
     List<LanguageSet> languageText = new List<LanguageSet>();
     void Start()
-    {       
+    {
         StartOperation();
         SetLanguage(memory.Get_String("Language"));
         SetLevel();

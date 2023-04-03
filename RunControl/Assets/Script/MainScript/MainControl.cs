@@ -173,6 +173,7 @@ public class MainControl : MonoBehaviour
                      LevelPoint = NpcAmount * 15;
                     memoryManager.Save_int("TotalPoint", memoryManager.Get_int("TotalPoint") + LevelPoint);
                     memoryManager.Save_int("CurrentLevel", scene.buildIndex + 1);
+                    Debug.Log(memoryManager.Get_int("CurrentLevel"));
                 }
                 else
                 {
